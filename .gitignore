@@ -1,0 +1,24 @@
+# Ignorer les fichiers compilés
+*.class
+*.o
+*.log
+
+# Ignorer les dossiers de configuration des environnements IDE
+.vscode/
+
+
+
+# Ignorer les fichiers de configuration système
+*.DS_Store
+
+# Ignorer les fichiers sensibles ou secrets
+Config/
+Config/secrets.js
+.env
+
+# Ignorer le répertoire des dépendances
+node_modules/
+
+# Ignorer les fichiers de sortie de build
+dist/
+build/
