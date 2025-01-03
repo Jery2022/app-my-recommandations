@@ -1,6 +1,7 @@
 import { Router } from 'express';
+import User  from '../models/User.js';
+
 const router = Router();
-import User, { find } from '../models/User';
 
 // Route pour créer un utilisateur
 router.post('/users', async (req, res) => {

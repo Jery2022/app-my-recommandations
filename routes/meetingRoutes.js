@@ -1,6 +1,7 @@
 import { Router } from 'express';
+import Meeting from '../models/Meeting.js';
+
 const router = Router();
-import Meeting, { find } from '../models/Meeting';
 
 // Route pour créer une réunion
 router.post('/meetings', async (req, res) => {

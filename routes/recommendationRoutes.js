@@ -1,6 +1,6 @@
 import { Router } from 'express';
+import Recommendation from '../models/Recommendation.js';
 const router = Router();
-import Recommendation, { find } from '../models/Recommendation';
 
 // Route pour créer une recommandation
 router.post('/recommendations', async (req, res) => {
