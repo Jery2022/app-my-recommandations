@@ -1,0 +1,33 @@
+/* En-tête */
+.navbar {
+    padding: 1rem;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('path/to/your/hero-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+}
+
+/* Boutons de Test des Routes */
+#routes button {
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: #fff;
+}
