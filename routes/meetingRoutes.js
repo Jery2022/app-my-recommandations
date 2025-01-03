@@ -23,4 +23,29 @@ router.get('/meetings', async (req, res) => {
     }
 });
 
+// Route pour mettre à jour une réunion 
+router.put('/meetings/:id', async (req, res) => { 
+    try { 
+        const meeting = await Meeting.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }); 
+    if (!meeting) { 
+        return res.status(404).send(); 
+    } 
+    res.status(200).send(meeting); 
+    } catch (err) { 
+        res.status(400).send(err);
+    }
+});
+
+// Route pour supprimer une réunion 
+router.delete('/meetings/:id', async (req, res) => { 
+    try { 
+        const meeting = await Meeting.findByIdAndDelete(req.params.id); 
+        if (!meeting) { return res.status(404).send(); 
+        } 
+        res.status(200).send(meeting); 
+    } catch (err) { 
+        res.status(500).send(err); 
+    } 
+});
+
 export default router;
