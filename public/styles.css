@@ -1,12 +1,36 @@
-/* En-tête */
+/* Navbar */
 .navbar {
     padding: 1rem;
 }
 
+header h1 {
+    color: #01284e;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+
+}
+
+header p {
+    color: #01284e;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+header .lead {
+    color: #01284e;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+
 /* Hero Section */
 .hero {
-    background-image: url('public/assets/images/image-Hero.png');
+    background-image: url('./assets/images/image-Hero.png');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
     height: 60vh;
 }

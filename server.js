@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import userRoutes from './routes/userRoutes.js';
 import meetingRoutes from './routes/meetingRoutes.js';
 import recommendationRoutes from './routes/recommendationRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,6 +13,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3000;
+
+// Middleware pour servir les fichiers statiques
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware pour analyser le corps des requêtes en JSON
 app.use(json());
@@ -27,12 +32,12 @@ connect('mongodb://localhost:27017/gestion_recommandations')
     });
 
 // Route de base
-
+/*
 app.get('/', (req, res) => {
     res.send('Bienvenue sur l\'application de gestion de suivi de recommandations de réunion !');
 });
 
-/* */
+ */
 app.get('/', (req, res) => { res.sendFile(__dirname + '/public/index.html'); });
 
 app.get('/meetings', (req, res) => { res.sendFile(__dirname + '/public/meetings.html'); });
@@ -44,6 +49,7 @@ app.get('/recommendations', (req, res) => { res.sendFile(__dirname + '/public/re
 app.use('/api', userRoutes);
 app.use('/api', meetingRoutes);
 app.use('/api', recommendationRoutes);
+app.use('/api', taskRoutes);
 
 
 // Démarrer le serveur
