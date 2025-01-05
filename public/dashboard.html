@@ -29,35 +29,59 @@
         </div>
     </nav>
     <main>
-        <!-- aside Section -->
-        <aside class="col-4 bg-light text-primary text-center py-5">
-            <div class="container">
-                <h2 class="text-center">Administration</h2>
-                <div class="d-flex flex-column text-center">
-                    <div class="mb-4">
-                        <button class="btn btn-primary w-100" onclick="testRoute('users')">Gestion des Utilisateurs</button>
+        <div class="row d-flex flex-md-row"> 
+            <!-- aside Section -->
+            <aside class="col-md-3 bg-black text-primary text-center py-5">
+                <div class="container">
+                    <h2 class="text-center mt-5">Administration</h2>
+                    <div class="d-flex flex-column text-center">
+                        <div class="mb-4">
+                            <button class="btn btn-primary w-100" onclick="show('users')">Gestion des Utilisateurs</button>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary w-100" onclick="show('meetings')">Gestion des Réunions</button>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary w-100" onclick="show('recommendations')">Gestion des Recommandations</button>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary w-100" onclick="show('tasks')">Gestion des Tâches</button>
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <button class="btn btn-primary w-100" onclick="testRoute('meetings')">Gestion des Réunions</button>
-                    </div>
-                    <div class="mb-4">
-                        <button class="btn btn-primary w-100" onclick="testRoute('recommendations')">Gestion des Recommandations</button>
-                    </div>
-                    <div class="mb-4">
-                        <button class="btn btn-primary w-100" onclick="testRoute('tasks')">Gestion des Tâches</button>
-                    </div>
+                    <div id="result" class="mt-4"></div>
                 </div>
-                <div id="result" class="mt-4"></div>
-            </div>
-        </aside>
+            </aside>
 
-        <!-- Section de l'affichage de l'administration -->
-        <section id="administration" class="py-5">
-            <div id="affichage" class="container">
-                <h2 class="text-center">Administration</h2>
-                <div id="result" class="row text-center"></div>
-            </div>
-        </section>
+            <!-- Section de l'affichage de l'administration --> 
+            <section id="administration" class="col-md-9 py-5">
+                <div id="result" class="container"></div>
+            </section>
+
+            <!-- Section de Gestion des Tâches 
+            <section id="tasks" class="col-md-9 py-5 "> 
+                <div class="container"> 
+                    <h2 class="text-center">Gérer les Tâches</h2> 
+                    <!-- Formulaire de Création de Tâche  
+                    <form id="taskForm" class="mb-4"> 
+                        <div class="mb-3"> <label for="title" class="form-label">Titre</label> 
+                            <input type="text" class="form-control" id="title" name="title" required> 
+                        </div> 
+                        <div class="mb-3"> <label for="description" class="form-label">Description</label> 
+                            <textarea class="form-control" id="description" name="description" rows="3" required></textarea> 
+                        </div> 
+                        <div class="mb-3"> <label for="dueDate" class="form-label">Date d'échéance</label> 
+                            <input type="date" class="form-control" id="dueDate" name="dueDate"> 
+                        </div> 
+                        <div class="mb-3"> <label for="assignedTo" class="form-label">Assigné à</label> 
+                            <input type="date" class="form-control" id="assignedTo" name="assignedTo" required> 
+                        </div> 
+                        <button type="submit" class="btn btn-primary">Créer Tâche</button> 
+                    </form> 
+                    <!-- Affichage de la liste des Tâches  
+                    <div id="tasksList"></div> 
+                </div> 
+            </section> --> 
+        </div>
     </main>
 
     <!-- Footer -->

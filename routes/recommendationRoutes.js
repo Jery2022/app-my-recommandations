@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import Recommendation from '../models/Recommendation.js';
+import authMiddlewares from '../middleware/authMiddleware.js';
+
+const authMiddleware = authMiddlewares;
+
 const router = Router();
 
 // Route pour créer une recommandation
-router.post('/recommendations', async (req, res) => {
+router.post('/recommendations', authMiddleware, async (req, res) => {
     try {
         const recommendation = new Recommendation(req.body);
         await recommendation.save();
@@ -14,7 +18,7 @@ router.post('/recommendations', async (req, res) => {
 });
 
 // Route pour obtenir toutes les recommandations
-router.get('/recommendations', async (req, res) => {
+router.get('/recommendations', authMiddleware, async (req, res) => {
     try {
         const recommendations = await find().populate('meeting assignedTo');
         res.status(200).send(recommendations);
@@ -24,7 +28,7 @@ router.get('/recommendations', async (req, res) => {
 });
 
 // Route pour mettre à jour une recommandation 
-router.put('/recommendations/:id', async (req, res) => { 
+router.put('/recommendations/:id', authMiddleware, async (req, res) => { 
     try { 
         const recommendation = await Recommendation.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }); 
         if (!recommendation) { 
@@ -37,7 +41,7 @@ router.put('/recommendations/:id', async (req, res) => {
 });
 
 // Route pour supprimer une recommandation 
-router.delete('/recommendations/:id', async (req, res) => { 
+router.delete('/recommendations/:id', authMiddleware, async (req, res) => { 
     try { 
         const recommendation = await Recommendation.findByIdAndDelete(req.params.id); 
         if (!recommendation) { 

@@ -2,13 +2,20 @@ import express, { json } from 'express';
 import { connect } from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import userRoutes from './routes/userRoutes.js';
-import meetingRoutes from './routes/meetingRoutes.js';
-import recommendationRoutes from './routes/recommendationRoutes.js';
-import taskRoutes from './routes/taskRoutes.js';
+import myUserRoutes from './routes/userRoutes.js';
+import myMeetingRoutes from './routes/meetingRoutes.js';
+import myRecommendationRoutes from './routes/recommendationRoutes.js';
+import myTaskRoutes from './routes/taskRoutes.js';
+import myAuthRoutes from './routes/authRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const userRoutes = myUserRoutes;
+const meetingRoutes = myMeetingRoutes;
+const recommendationRoutes = myRecommendationRoutes;
+const taskRoutes = myTaskRoutes;
+const authRoutes = myAuthRoutes;
 
 
 const app = express();
@@ -45,11 +52,18 @@ app.get('/meetings', (req, res) => { res.sendFile(__dirname + '/public/meetings.
 app.get('/recommendations', (req, res) => { res.sendFile(__dirname + '/public/recommendations.html'); });
 
 
-// Utiliser les routes de tests
-app.use('/api', userRoutes);
+// Utiliser les routes définies dans les fichiers de routes
+/* app.use('/api', userRoutes);  
 app.use('/api', meetingRoutes);
 app.use('/api', recommendationRoutes);
-app.use('/api', taskRoutes);
+app.use('/api', taskRoutes); */
+
+app.use('/api', authRoutes); // Utiliser les routes d'authentification
+
+// Gestion des erreurs 404 
+app.use((req, res) => {
+    res.status(404).send('Page non trouvée');
+});
 
 
 // Démarrer le serveur

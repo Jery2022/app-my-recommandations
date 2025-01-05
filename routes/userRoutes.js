@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import User  from '../models/User.js';
+import authMiddlewares from '../middleware/authMiddleware.js';
+
+const authMiddleware = authMiddlewares;
 
 const router = Router();
 
 // Route pour créer un utilisateur
-router.post('/users', async (req, res) => {
+router.post('/users', authMiddleware, async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();
@@ -15,7 +18,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Route pour obtenir tous les utilisateurs
-router.get('/users', async (req, res) => {
+router.get('/users', authMiddleware, async (req, res) => {
     try {
         const users = await find();
         res.status(200).send(users);
@@ -25,7 +28,7 @@ router.get('/users', async (req, res) => {
 });
 
 // Route pour mettre à jour un utilisateur 
-router.put('/users/:id', async (req, res) => { 
+router.put('/users/:id', authMiddleware, async (req, res) => { 
     try { 
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }); 
         if (!user) { 
@@ -38,7 +41,7 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Route pour supprimer un utilisateur 
-router.delete('/users/:id', async (req, res) => { 
+router.delete('/users/:id', authMiddleware, async (req, res) => { 
     try { 
         const user = await User.findByIdAndDelete(req.params.id); 
         if (!user) { 

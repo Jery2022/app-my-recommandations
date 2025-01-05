@@ -25,6 +25,11 @@ header .lead {
     margin-bottom: 1rem;
 }
 
+main {
+    padding: 2rem;
+    max-height: 100vh;
+}
+
 
 /* Hero Section */
 .hero {

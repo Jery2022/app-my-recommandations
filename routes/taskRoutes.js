@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import Task  from '../models/Task.js';
+import authMiddlewares from '../middleware/authMiddleware.js';
+
+const authMiddleware = authMiddlewares;
 
 const router = Router();
 
 // Route pour créer une tâche
-router.post('/tasks', async (req, res) => {
+router.post('/tasks', authMiddleware, async (req, res) => {
     try {
         const task = new Task(req.body);
         await task.save();
@@ -15,7 +18,7 @@ router.post('/tasks', async (req, res) => {
 });
 
 // Route pour obtenir toutes les tâches
-router.get('/tasks', async (req, res) => {
+router.get('/tasks', authMiddleware, async (req, res) => {
     try {
         const tasks = await Task.find().populate('assignedTo recommendation');
         res.status(200).send(tasks);
@@ -25,7 +28,7 @@ router.get('/tasks', async (req, res) => {
 });
 
 // Route pour mettre à jour une tâche
-router.put('/tasks/:id', async (req, res) => {
+router.put('/tasks/:id', authMiddleware, async (req, res) => {
     try {
         const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!task) {
@@ -38,7 +41,7 @@ router.put('/tasks/:id', async (req, res) => {
 });
 
 // Route pour supprimer une tâche
-router.delete('/tasks/:id', async (req, res) => {
+router.delete('/tasks/:id', authMiddleware, async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params.id);
         if (!task) {

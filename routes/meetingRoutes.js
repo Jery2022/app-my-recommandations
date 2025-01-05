@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import Meeting from '../models/Meeting.js';
+import authMiddlewares from '../middleware/authMiddleware.js';
+
+const authMiddleware = authMiddlewares;
 
 const router = Router();
 
 // Route pour créer une réunion
-router.post('/meetings', async (req, res) => {
+router.post('/meetings', authMiddleware, async (req, res) => {
     try {
         const meeting = new Meeting(req.body);
         await meeting.save();
@@ -15,7 +18,7 @@ router.post('/meetings', async (req, res) => {
 });
 
 // Route pour obtenir toutes les réunions
-router.get('/meetings', async (req, res) => {
+router.get('/meetings', authMiddleware, async (req, res) => {
     try {
         const meetings = await find().populate('attendees');
         res.status(200).send(meetings);
@@ -25,7 +28,7 @@ router.get('/meetings', async (req, res) => {
 });
 
 // Route pour mettre à jour une réunion 
-router.put('/meetings/:id', async (req, res) => { 
+router.put('/meetings/:id', authMiddleware, async (req, res) => { 
     try { 
         const meeting = await Meeting.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }); 
     if (!meeting) { 
@@ -38,7 +41,7 @@ router.put('/meetings/:id', async (req, res) => {
 });
 
 // Route pour supprimer une réunion 
-router.delete('/meetings/:id', async (req, res) => { 
+router.delete('/meetings/:id', authMiddleware, async (req, res) => { 
     try { 
         const meeting = await Meeting.findByIdAndDelete(req.params.id); 
         if (!meeting) { return res.status(404).send(); 

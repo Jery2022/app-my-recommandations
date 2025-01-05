@@ -9,6 +9,14 @@ const MeetingSchema = new Schema({
         type: Date,
         required: true
     },
+    location: {
+        type: String,
+        required: true
+    },
+    duration: {
+        type: Number,
+        required: true
+    },
     attendees: [{
         type: Schema.Types.ObjectId,
         ref: 'User'

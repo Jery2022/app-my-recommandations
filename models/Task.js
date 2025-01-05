@@ -21,7 +21,8 @@ const TaskSchema = new Schema({
     },
     assignedTo: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     recommendation: {
         type: mongoose.Schema.Types.ObjectId,
