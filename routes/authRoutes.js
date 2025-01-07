@@ -32,7 +32,10 @@ router.post('/login', async (req, res) => {
             return res.status(401).send('Email ou mot de passe incorrect.');
         }
         const token = sign({ userId: user._id, role: user.role }, secret, { expiresIn: '1h' });
-        res.status(200).send({ token });
+        
+        // Redirection en fonction du rôle 
+        const redirectUrl = user.role === 'admin' ? '/admin.html' : '/member.html'; 
+        res.status(200).send({ token, redirectUrl });
     } catch (err) {
         res.status(400).send(err);
     }

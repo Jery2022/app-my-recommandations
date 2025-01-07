@@ -66,45 +66,35 @@ function loginUser() {
         }, 
         body: JSON.stringify({ email, password }) 
     })
+    .then(response => response.json()) 
     .then(data => { 
         console.log('statut de la connexion :', data); 
         localStorage.setItem('token', data.token); 
+        //alert('Connexion réussie. Vous pouvez maintenant accéder aux fonctionnalités d\'administration.'); 
         document.getElementById('loginForm').reset(); 
-        alert('Connexion réussie. Vous allez être redirigé vers la page appropriée.');
-        
-        if (data.role === 'admin') {
-            window.location.href = '/admin'; // Rediriger vers la page d'administration
-        } else if (data.role === 'member') {
-            window.location.href = '/member'; // Rediriger vers la page des membres
-        }else{
-            window.location.href = '/'; // Rediriger vers la page des invités
-        }
-    })
-    .catch(error => { 
+        //loadTasks(); // Charger les tâches après la connexion 
+        show('users');
+    }).catch(error => { 
         console.error('Erreur:', error); 
         alert('Échec de la connexion. Veuillez vérifier vos identifiants.'); 
-    });
+    }); 
 }
-    
-    // Charger les routes
-    function show(route) {
-        fetch(`/api/${route}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const titleSection = route.charAt(0).toUpperCase() + route.slice(1);
-                const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = `
-                    <h2>${titleSection}</h2>
+
+// Charger les routes
+function show(route) {
+    fetch(`/api/${route}`)
+        .then(response => response.json())
+        .then(data => {
+            const titleSection = route.charAt(0).toUpperCase() + route.slice(1);
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div class="container">
+                    <h2 class="text-center mt-5">${titleSection}</h2>
                     <pre>${JSON.stringify(data, null, 2)}</pre>
-                `;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                alert('Échec du chargement des données.');
-            });
-    }
+                </div>`;
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+}
+
